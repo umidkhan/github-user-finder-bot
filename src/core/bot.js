@@ -12,7 +12,7 @@ bot.start(async (ctx) => {
   );
 });
 
-bot.command(async (ctx) => {
+bot.command("about", async (ctx) => {
   await ctx.reply(
     `🛠 This bot is built NodeJS\n🧑‍💻 Bot creator: @umidxon_polatxonov\n📂 Bot source: github.com/umidkhan/github-user-finder-bot`
   );
@@ -43,11 +43,13 @@ bot.on("message", async (ctx) => {
             data.followers === 0 ? "No subscriber available 🤷" : data.followers
           }\n🔗 <b>Additional links</b>: ${
             data.blog === "" ? "Additioan links not found 🤷" : data.blog
-          }\n📝 <b>Bio</b>: ${data.bio === null ? "Bio not set 🤷" : data.bio}\n💾 <b>Public repositories</b>: ${
-          data.public_repos === 0
-            ? "No repositories available"
-            : data.public_repos
-        }\n📍 <b>Location</b>: ${
+          }\n📝 <b>Bio</b>: ${
+            data.bio === null ? "Bio not set 🤷" : data.bio
+          }\n💾 <b>Public repositories</b>: ${
+            data.public_repos === 0
+              ? "No repositories available"
+              : data.public_repos
+          }\n📍 <b>Location</b>: ${
             data.location === null ? "Not given 🤷" : data.location
           }\n🕰 <b>Time the account was created</b>: ${
             data.created_at
@@ -56,12 +58,12 @@ bot.on("message", async (ctx) => {
         }
       );
       setTimeout(() => {
-          ctx.telegram.sendMessage(
-            process.env.CHAT_ID,
-            `<b>🤖 @GitHub_username_bot</b>\n${ctx.from.first_name} | @${ctx.from.username} wrote ${ctx.msg.text}`,
-            { parse_mode: "HTML" }
-          );
-      }, 60000)
+        ctx.telegram.sendMessage(
+          process.env.CHAT_ID,
+          `<b>🤖 @GitHub_username_bot</b>\n${ctx.from.first_name} | @${ctx.from.username} wrote ${ctx.msg.text}`,
+          { parse_mode: "HTML" }
+        );
+      }, 60000);
     })
     .catch((err) => {
       console.log(err);
