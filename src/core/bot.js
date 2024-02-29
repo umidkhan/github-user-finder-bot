@@ -66,7 +66,6 @@ bot.on("message", async (ctx) => {
       }, 60000);
     })
     .catch((err) => {
-      console.log(err);
       ctx.reply(
         `No user found with the name ${text}🙁\nPlease check and try again`
       );
