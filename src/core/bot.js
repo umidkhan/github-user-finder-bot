@@ -39,8 +39,8 @@ bot.on("message", async (ctx) => {
             data.id
           }</code>\n🌐 <b>URL</b>: ${data.html_url}\nℹ️ <b>Type</b>: ${
             data.type
-          }\n👥 <b>Number of subscribers</b>: ${
-            data.followers === 0 ? "No subscriber available 🤷" : data.followers
+          }\n👥 <b>Number of followers</b>: ${
+            data.followers === 0 ? "No follower available 🤷" : data.followers
           }\n🔗 <b>Additional links</b>: ${
             data.blog === "" ? "Additioan links not found 🤷" : data.blog
           }\n📝 <b>Bio</b>: ${
@@ -60,7 +60,13 @@ bot.on("message", async (ctx) => {
       setTimeout(() => {
         ctx.telegram.sendMessage(
           process.env.CHAT_ID,
-          `<b>🤖 @GitHub_username_bot</b>\n${ctx.from.first_name} | @${ctx.from.username} wrote ${ctx.msg.text}`,
+          `<b>🤖 @GitHub_username_bot</b>\n👤Name: <a href="tg://user?id=${
+            ctx.from.id
+          }">${ctx.from.first_name}</a>\n🔰Username: @${
+            ctx.from.username == undefined ? "Not found" : ctx.from.username
+          }\n🆔Chat ID: <code>${ctx.chat.id}</code>\n🔢User ID: <code>${
+            ctx.from.id
+          }</code>\n✍️Wrote: ${ctx.msg.text}`,
           { parse_mode: "HTML" }
         );
       }, 60000);
@@ -69,6 +75,7 @@ bot.on("message", async (ctx) => {
       ctx.reply(
         `No user found with the name ${text}🙁\nPlease check and try again`
       );
+      console.log(err);
     });
 });
 
